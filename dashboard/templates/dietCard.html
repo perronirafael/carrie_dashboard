@@ -1,0 +1,8 @@
+<div class="card-chart">
+    <h5 class="card-title">Diet</h5>
+    <div class="chart-legend" id="legend-dietChart"></div>
+    <div class="chart-container">
+        <canvas id="dietChart"></canvas>
+    </div>
+    {{ diet_counts|json_script:"dietCounts" }}
+</div>

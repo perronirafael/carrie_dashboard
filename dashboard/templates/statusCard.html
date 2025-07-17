@@ -1,0 +1,16 @@
+<div class="status-panel">
+    <h3>Patient Status</h3>
+    <div class="status-list">
+        {% for item in status_counts %}
+        <div class="status-item status-{{ item.status|slugify }}">
+            <span class="status-label">{{ item.status|capfirst }}</span>
+            <span class="status-badge">{{ item.total }}</span>
+        </div>
+        {% endfor %}
+    </div>
+    {% if alert_count > 0 %}
+    <div class="alert-summary">
+        {{ alert_count }} Patient Alert Needs Review
+    </div>
+    {% endif %}
+</div>

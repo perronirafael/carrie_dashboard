@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Patients</h2>
+<a href="new/" class="btn btn-primary mb-2">Register Patient</a>
+<table class="table table-bordered">
+  <thead><tr><th>First Name</th><th>Last Name</th><th>MRN</th><th>Alerts</th><th>Notifications</th><th>Provider</th><th>Diagnosis</th><th>Status</th><th>Last Session Date</th><th>Actions</th></tr></thead>
+  <tbody>{% for p in patients %}<tr>
+    <td>{{ p.first_name }}</td><td>{{ p.last_name }}</td><td>{{ p.mrn }}</td><td>{{ p.alerts }}</td><td>{{ p.notifications }}</td>
+    <td>{{ p.provider }}</td><td>{{ p.diagnosis }}</td><td>{{ p.status }}</td><td>{{ p.last_session_date }}</td>
+    <td><a href="{{ p.id }}/edit/">Edit</a> | <a href="{{ p.id }}/delete/">Delete</a></td>
+  </tr>{% endfor %}</tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,7 @@
+<div class="card-chart">
+    <h5 class="card-title">Missed Check-Ins</h5>
+    <div class="chart-container">
+        <canvas id="missedChart"></canvas>
+    </div>
+    {{ missed_checkins|json_script:"missedCounts" }}
+</div>

@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Health Carrie{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+
+<body>
+  <div id="main">
+    <div class="sidebar">
+      <nav>
+        <div class="link-container {% if request.path == '/' %}active{% endif %}">
+          <span class="icon icon-dashboard"></span>
+          <a href="/">
+            Dashboard
+          </a>
+        </div>
+        <div class="link-container {% if request.path == '/patients/' %}active{% endif %}">
+          <span class="icon icon-patients"></span>
+          <a href="/patients/">
+            Patients
+          </a>
+        </div>
+      </nav>
+      <div>
+        <div class="link-container">
+          <span class="icon icon-settings"></span>
+          <a href="">
+            Settings
+          </a>
+        </div>
+        <div class="link-container">
+          <span class="icon icon-help"></span>
+          <a href="">
+            Help
+          </a>
+        </div>
+        <div class="user-container">
+          <img src="{% static 'images/user.png' %}" alt="User">
+          <h1>John Doe</h1>
+        </div>
+      </div>
+    </div>
+    <div class="content-container">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="{% static 'js/cardCharts.js' %}"></script>
+</body>
+
+</html>

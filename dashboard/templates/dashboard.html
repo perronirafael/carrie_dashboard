@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="header">
+  <h2>Provider Dashboard - Carrie</h2>
+</div>
+<div class="header filters">
+  <div>
+    <label for="Diagnosis">Diagnosis</label>
+    <select name="Diagnosis" id="Diagnosis">
+      <option value="all">All</option>
+      <option value="chf1">CHF Stage I</option>
+      <option value="chf2">CHF Stage II</option>
+      <option value="chf3">CHF Stage III</option>
+      <option value="chf4">CHF Stage IV</option>
+      <option value="diabetes">Diabetes</option>
+      <option value="hypertension">Hypertension</option>
+    </select>
+  </div>
+  <div>
+    <label for="Ages">Age group</label>
+    <select name="Ages" id="ages">
+      <option value="all">All</option>
+      <option value="young">18-30</option>
+      <option value="mid">31-50</option>
+      <option value="older">51+</option>
+    </select>
+  </div>
+  <div>
+    <label for="startDate">Start date:</label>
+    <input type="date" id="start" name="startDate" value="2018-07-15" />
+  </div>
+  <div>
+    <label for="endDate">End date:</label>
+    <input type="date" id="end" name="endDate" value="2018-07-15" />
+  </div>
+</div>
+<div class="charts-row">
+  {% include 'statusCard.html' %}
+  {% include 'missedCard.html' %}
+  {% include 'medicationCard.html' %}
+  {% include 'dietCard.html' %}
+  {% include 'exerciseCard.html' %}
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}

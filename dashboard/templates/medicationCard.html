@@ -1,0 +1,8 @@
+<div class="card-chart">
+    <h5 class="card-title">Medication Adherence Status</h5>
+    <div class="chart-legend" id="legend-medChart"></div>
+    <div class="chart-container">
+        <canvas id="medChart"></canvas>
+    </div>
+    {{ medication_counts|json_script:"medCounts" }}
+</div>
