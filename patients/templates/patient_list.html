@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load patient_extras %}
+{% load static %}
+{% block content %}
+<div class="header header-patient">
+  <h2>Patients</h2>
+  <button class="btn-register open-modal" data-modal="patientFormModal" data-url="{% url 'patient_create' %}">
+    <img src="{% static 'images/add.svg' %}" alt="Add"
+      style="width: 1rem; vertical-align: middle; margin-right: 0.25rem;">
+    Register Patient
+  </button>
+</div>
+<div class="patient-table-container">
+  <div class="table-wrapper">
+    <table class="patient-table">
+      <thead>
+        <tr>
+          <th>Patient Name</th>
+          <th>Alerts</th>
+          <th>Notifications</th>
+          <th>Provider</th>
+          <th>Status</th>
+          <th>Last Session Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for patient in patients %}
+        <tr>
+          <td>
+            <strong>{{ patient.first_name }} {{ patient.last_name }}</strong><br>
+            <small class="mrn">MRN {{ patient.mrn }}</small>
+          </td>
+          <td>{{ patient.alerts }}</td>
+          <td>{{ patient.notifications }}</td>
+          <td>{{ patient.provider }}</td>
+          <td>
+            <div class="status-label">
+              <img src="{% static 'images/flag-' %}{{ patient.status|status_color }}.svg" alt="flag"
+                class="status-flag" />
+              <span class="status-{{ patient.status|status_color }}">
+                {{ patient.status|status_color|title }}
+              </span>
+            </div>
+          </td>
+          <td>{{ patient.last_session_date }}</td>
+          <td class="action-links">
+            <button class="btn-icon open-modal" data-modal="patientFormModal"
+              data-url="{% url 'patient_update' patient.id %}">
+              <img src="{% static 'images/edit.svg' %}" alt="Edit" width="28" height="28">
+            </button>
+
+            <button class="btn-icon open-modal" data-modal="deleteConfirmModal"
+              data-url="{% url 'patient_delete' patient.id %}">
+              <img src="{% static 'images/delete.svg' %}" alt="Delete" width="28" height="28">
+            </button>
+
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+  {% include 'patient_form.html' %}
+  {% include 'patient_confirm_delete.html' %}
+<script src="{% static 'js/modal.js' %}"></script>
+{% endblock %}

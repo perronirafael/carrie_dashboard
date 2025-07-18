@@ -1,16 +1,13 @@
-<div class="status-panel">
-    <h3>Patient Status</h3>
-    <div class="status-list">
-        {% for item in status_counts %}
-        <div class="status-item status-{{ item.status|slugify }}">
-            <span class="status-label">{{ item.status|capfirst }}</span>
-            <span class="status-badge">{{ item.total }}</span>
-        </div>
-        {% endfor %}
+<div class="card-chart status-card">
+  <h3 class="card-title">Patient Status</h3>
+  <div class="status-panel">
+    <div id="patientStatusList" class="status-list"></div>
+
+    <div id="noStatusData" class="no-data-message white-message" style="display: none;">
+      Any available data for patient status.
     </div>
-    {% if alert_count > 0 %}
-    <div class="alert-summary">
-        {{ alert_count }} Patient Alert Needs Review
+
+    <div id="alertSummary" class="alert-summary" style="display: none;">
     </div>
-    {% endif %}
+  </div>
 </div>

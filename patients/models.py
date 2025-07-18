@@ -20,6 +20,7 @@ class Patient(models.Model):
     last_session_date = models.DateField(null=True, blank=True)
     alerts = models.IntegerField(default=0)
     notifications = models.IntegerField(default=0)
+    age = models.IntegerField()
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 

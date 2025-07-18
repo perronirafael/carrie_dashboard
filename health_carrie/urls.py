@@ -8,7 +8,7 @@ from dashboard.views import DashboardView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('patients/', include('patients.urls')),
-    path('', DashboardView.as_view(), name='dashboard'),
+    path('', include('dashboard.urls')),
 ]
 
 if settings.DEBUG:

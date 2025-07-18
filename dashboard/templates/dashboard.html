@@ -8,12 +8,12 @@
     <label for="Diagnosis">Diagnosis</label>
     <select name="Diagnosis" id="Diagnosis">
       <option value="all">All</option>
-      <option value="chf1">CHF Stage I</option>
-      <option value="chf2">CHF Stage II</option>
-      <option value="chf3">CHF Stage III</option>
-      <option value="chf4">CHF Stage IV</option>
-      <option value="diabetes">Diabetes</option>
-      <option value="hypertension">Hypertension</option>
+      <option value="CHF Stage I">CHF Stage I</option>
+      <option value="CHF Stage II">CHF Stage II</option>
+      <option value="CHF Stage III">CHF Stage III</option>
+      <option value="CHF Stage IV">CHF Stage IV</option>
+      <option value="Diabetes">Diabetes</option>
+      <option value="Hypertension">Hypertension</option>
     </select>
   </div>
   <div>
@@ -41,5 +41,24 @@
   {% include 'dietCard.html' %}
   {% include 'exerciseCard.html' %}
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth(); 
+    const firstDay = new Date(year, month, 1);
+
+    const lastDay = new Date(year, month + 1, 0);
+
+    const formatDate = (date) => {
+      const m = (date.getMonth() + 1).toString().padStart(2, '0');
+      const d = date.getDate().toString().padStart(2, '0');
+      return `${date.getFullYear()}-${m}-${d}`;
+    };
+
+    document.getElementById('start').value = formatDate(firstDay);
+    document.getElementById('end').value = formatDate(lastDay);
+  });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% endblock %}
