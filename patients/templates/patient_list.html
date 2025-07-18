@@ -1,68 +1,90 @@
 {% extends 'base.html' %}
 {% load patient_extras %}
 {% load static %}
+
 {% block content %}
 <div class="header header-patient">
   <h2>Patients</h2>
-  <button class="btn-register open-modal" data-modal="patientFormModal" data-url="{% url 'patient_create' %}">
-    <img src="{% static 'images/add.svg' %}" alt="Add"
-      style="width: 1rem; vertical-align: middle; margin-right: 0.25rem;">
-    Register Patient
-  </button>
-</div>
-<div class="patient-table-container">
-  <div class="table-wrapper">
-    <table class="patient-table">
-      <thead>
-        <tr>
-          <th>Patient Name</th>
-          <th>Alerts</th>
-          <th>Notifications</th>
-          <th>Provider</th>
-          <th>Status</th>
-          <th>Last Session Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for patient in patients %}
-        <tr>
-          <td>
-            <strong>{{ patient.first_name }} {{ patient.last_name }}</strong><br>
-            <small class="mrn">MRN {{ patient.mrn }}</small>
-          </td>
-          <td>{{ patient.alerts }}</td>
-          <td>{{ patient.notifications }}</td>
-          <td>{{ patient.provider }}</td>
-          <td>
-            <div class="status-label">
-              <img src="{% static 'images/flag-' %}{{ patient.status|status_color }}.svg" alt="flag"
-                class="status-flag" />
-              <span class="status-{{ patient.status|status_color }}">
-                {{ patient.status|status_color|title }}
-              </span>
-            </div>
-          </td>
-          <td>{{ patient.last_session_date }}</td>
-          <td class="action-links">
-            <button class="btn-icon open-modal" data-modal="patientFormModal"
-              data-url="{% url 'patient_update' patient.id %}">
-              <img src="{% static 'images/edit.svg' %}" alt="Edit" width="28" height="28">
-            </button>
-
-            <button class="btn-icon open-modal" data-modal="deleteConfirmModal"
-              data-url="{% url 'patient_delete' patient.id %}">
-              <img src="{% static 'images/delete.svg' %}" alt="Delete" width="28" height="28">
-            </button>
-
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  <div class="btn-container">
+    <button class="btn-register open-modal" data-modal="patientFormModal" data-url="{% url 'patient_create' %}">
+      <img src="{% static 'images/add.svg' %}" alt="Add"
+        style="width: 1rem; vertical-align: middle; margin-right: 0.25rem;">
+      Register Patient
+    </button>
+    <button id="toggleChartsBtn" class="btn-register" style="margin-left: .5rem;">
+      Show Charts
+    </button>
   </div>
 </div>
-  {% include 'patient_form.html' %}
-  {% include 'patient_confirm_delete.html' %}
+
+<div class="patients-layout">
+  <div class="patient-table-container">
+    <div class="table-wrapper">
+      <table class="patient-table">
+        <thead>
+          <tr>
+            <th>Patient Name</th>
+            <th>Alerts</th>
+            <th>Notifications</th>
+            <th>Provider</th>
+            <th>Status</th>
+            <th>Last Session Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for patient in patients %}
+          <tr>
+            <td>
+              <strong>{{ patient.first_name }} {{ patient.last_name }}</strong><br>
+              <small class="mrn">MRN {{ patient.mrn }}</small>
+            </td>
+            <td>{{ patient.alerts }}</td>
+            <td>{{ patient.notifications }}</td>
+            <td>{{ patient.provider }}</td>
+            <td>
+              <div class="status-label">
+                <img src="{% static 'images/flag-' %}{{ patient.status|status_color }}.svg" alt="flag"
+                  class="status-flag" />
+                <span class="status-{{ patient.status|status_color }}">
+                  {{ patient.status|status_color|title }}
+                </span>
+              </div>
+            </td>
+            <td>{{ patient.last_session_date }}</td>
+            <td class="action-links">
+              <button class="btn-icon open-modal" data-modal="patientFormModal"
+                data-url="{% url 'patient_update' patient.id %}" data-first-name="{{ patient.first_name }}"
+                data-last-name="{{ patient.last_name }}" data-mrn="{{ patient.mrn }}" data-age="{{ patient.age }}"
+                data-provider="{{ patient.provider.id }}" data-diagnosis="{{ patient.diagnosis.id }}"
+                data-status="{{ patient.status }}"
+                data-last-session-date="{{ patient.last_session_date|date:'Y-m-d' }}">
+                <img src="{% static 'images/edit.svg' %}" alt="Edit">
+              </button>
+              <button class="btn-icon open-modal" data-modal="deleteConfirmModal"
+                data-url="{% url 'patient_delete' patient.id %}">
+                <img src="{% static 'images/delete.svg' %}" alt="Delete">
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="chartsPanel" class="hidden">
+    {% include 'missedCard.html' %}
+    {% include 'medicationCard.html' %}
+    {% include 'dietCard.html' %}
+    {% include 'exerciseCard.html' %}
+  </div>
+</div>
+
+{% include 'patient_form.html' %}
+{% include 'patient_confirm_delete.html' %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{% static 'js/modal.js' %}"></script>
+<script type="module" src="{% static 'js/toggleCharts.js' %}"></script>
 {% endblock %}

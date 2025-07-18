@@ -8,7 +8,9 @@
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div class="modal-actions">
-                    <button type="submit" class="btn-confirm">Save</button>
+                    <button id="patientFormSubmit" type="submit" class="btn-confirm btn-disabled" disabled>
+                        Save
+                    </button>
                     <button type="button" class="btn-cancel" onclick="closeModal('patientFormModal')">
                         Cancel
                     </button>

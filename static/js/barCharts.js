@@ -78,3 +78,16 @@ export function renderMissedBarChart(canvasId, data) {
     }
   });
 }
+
+export function fetchAndRenderMissedChartWithOutFilter() {
+  const url = `/missed-checkins-data/`;
+
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      renderMissedChartOrMessage('missedChart', data);
+    })
+    .catch((err) => {
+      console.error("Erro ao buscar dados de missed check-ins:", err);
+    });
+}

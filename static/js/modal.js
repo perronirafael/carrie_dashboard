@@ -1,47 +1,65 @@
-async function openModal(modalId, actionUrl = null) {
+function updateSaveButtonState(form) {
+    const fields = Array.from(form.querySelectorAll('input, select'))
+        .filter(el => el.type !== 'hidden' && el.type !== 'submit');
+    const allFilled = fields.every(el => el.value.trim() !== '');
+    const btn = form.querySelector('#patientFormSubmit');
+
+    if (allFilled && form.checkValidity()) {
+        btn.disabled = false;
+        btn.classList.remove('btn-disabled');
+    } else {
+        btn.disabled = true;
+        btn.classList.add('btn-disabled');
+    }
+}
+
+
+function openModal(modalId, url, triggerBtn) {
     const modal = document.getElementById(modalId);
-    if (!modal) return;
-
-    if (modalId === 'patientFormModal' && actionUrl) {
-        const res = await fetch(actionUrl);
-        const html = await res.text();
-
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const form = doc.querySelector('#patientForm');
-
-        const titleEl = modal.querySelector('#modalTitle');
-        titleEl.textContent = actionUrl.includes('/edit/')
-            ? 'Edit Patient'
-            : 'Add Patient';
-
-        const bodyEl = modal.querySelector('.modal-body');
-        bodyEl.innerHTML = '';
-        if (form) bodyEl.appendChild(form);
-    }
-
-    if (modalId === 'deleteConfirmModal' && actionUrl) {
-        const delForm = modal.querySelector('#deleteForm');
-        if (delForm) delForm.action = actionUrl;
-    }
-
     modal.classList.remove('hidden');
+
+    if (modalId === 'patientFormModal') {
+        const title = modal.querySelector('.modal-title');
+        const form = modal.querySelector('#patientForm');
+
+        form.action = url;
+        const isCreate = url.endsWith('/new/') || /\/patients\/create/.test(url);
+        title.textContent = isCreate ? 'Add Patient' : 'Edit Patient';
+
+        if (isCreate) {
+            form.reset();
+        } else {
+            const d = triggerBtn.dataset;
+            form.querySelector('[name="first_name"]').value = d.firstName;
+            form.querySelector('[name="last_name"]').value = d.lastName;
+            form.querySelector('[name="mrn"]').value = d.mrn;
+            form.querySelector('[name="age"]').value = d.age;
+            form.querySelector('[name="provider"]').value = d.provider;
+            form.querySelector('[name="diagnosis"]').value = d.diagnosis;
+            form.querySelector('[name="status"]').value = d.status;
+            form.querySelector('[name="last_session_date"]').value = d.lastSessionDate;
+        }
+
+        updateSaveButtonState(form);
+        form.querySelectorAll('input, select').forEach(el => {
+            el.addEventListener('input', () => updateSaveButtonState(form));
+        });
+    }
+    else if (modalId === 'deleteConfirmModal') {
+        const delForm = modal.querySelector('#deleteForm');
+        if (delForm) delForm.action = url;
+    }
 }
 
 
 function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (!modal) return;
-    modal.classList.add('hidden');
+    document.getElementById(modalId).classList.add('hidden');
 }
 
-
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.open-modal').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const target = btn.dataset.modal;
-            const url = btn.dataset.url;
-            openModal(target, url);
-        });
+document.querySelectorAll('.open-modal').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const modalId = btn.dataset.modal;
+        const url = btn.dataset.url;
+        openModal(modalId, url, btn);
     });
 });
