@@ -1,0 +1,229 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.modal-header {
+    padding: 0.75rem 1rem;
+    background-color: #e0f2fe;
+    color: #0369a1;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-body p {
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+    color: #374151;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="number"],
+.modal-content input[type="datetime-local"],
+.modal-content select {
+    width: 100%;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background: #fff;
+    font-size: 0.875rem;
+    color: #374151;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}
+
+.modal-content input[type="text"]:hover,
+.modal-content input[type="number"]:hover,
+.modal-content input[type="datetime-local"]:hover,
+.modal-content select:hover {
+    border-color: #a1a1aa;
+    cursor: pointer;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.modal-actions .btn-confirm,
+.modal-actions .btn-cancel {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.modal-actions .btn-cancel {
+    background-color: #f3f4f6;
+    color: #374151;
+    border-color: #d1d5db;
+}
+
+.modal-actions .btn-cancel:hover {
+    background-color: #e5e7eb;
+}
+
+.modal-actions .btn-confirm {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    border-color: #bae6fd;
+}
+
+.modal-actions .btn-confirm:hover {
+    background-color: #bae6fd;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    padding: 0.25rem;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
+}
+
+.btn-icon:hover {
+    background-color: rgba(31, 41, 55, 0.08);
+    transform: scale(1.1);
+}
+
+.btn-icon:hover img {
+    opacity: 0.85;
+}
+
+.btn-icon:focus {
+    outline: 2px solid #1e40af;
+    outline-offset: 2px;
+}
+
+.btn-icon img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.btn-register {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+    padding: 0.5rem 1rem;
+    height: 35px;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-register:hover {
+    background-color: #bae6fd;
+    border-color: #7dd3fc;
+}
+
+.btn-disabled {
+    background-color: #f3f4f6 !important;
+    color: #9ca3af !important;
+    border-color: #d1d5db !important;
+    opacity: 0.6 !important;
+    pointer-events: none !important;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    flex-direction: row;
+}
+
+#deleteConfirmModal .modal-content {
+    border-radius: 12px;
+    max-width: 450px;
+}
+
+#deleteConfirmModal .modal-header {
+    padding: 0.5rem 1rem;
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+#deleteConfirmModal .modal-header h3 {
+    line-height: 1.2;
+}
+
+#deleteConfirmModal .modal-body {
+    padding: 1rem 2rem;
+}
+
+#deleteConfirmModal .modal-body p {
+    margin: 0.5rem 0;
+}
+
+#deleteConfirmModal .modal-actions {
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+
+#deleteConfirmModal .modal-actions .btn-danger,
+#deleteConfirmModal .modal-actions .btn-cancel {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+#deleteConfirmModal .modal-actions .btn-danger {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border-color: #fdbdbd;
+}
+
+#deleteConfirmModal .modal-actions .btn-cancel {
+    background-color: #f3f4f6;
+    color: #374151;
+    border-color: #d1d5db;
+}
+
+#deleteConfirmModal .modal-actions .btn-danger:hover {
+    background-color: #fecaca;
+    cursor: pointer;
+}
+
+#deleteConfirmModal .modal-actions .btn-cancel:hover {
+    background-color: #e5e7eb;
+    cursor: pointer;
+}

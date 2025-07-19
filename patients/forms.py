@@ -18,10 +18,10 @@ class PatientForm(forms.ModelForm):
             'last_session_date'
         ]
         widgets = {
-            'last_session_date': forms.DateInput(
-                attrs={'type': 'date'},
-                format='%Y-%m-%d',
-            ),
+           'last_session_date': forms.DateTimeInput(
+               attrs={'type': 'datetime-local'},
+               format='%Y-%m-%dT%H:%M',
+           ),
         }
 
     def __init__(self, *args, **kwargs):
@@ -31,4 +31,8 @@ class PatientForm(forms.ModelForm):
             fld.required = True
             fld.widget.attrs.update({'required': 'required'})
 
-        self.fields['last_session_date'].input_formats = ['%Y-%m-%d']
+        self.fields['last_session_date'].input_formats = ['%Y-%m-%dT%H:%M']
+
+        if self.instance and getattr(self.instance, 'last_session_date', None):
+            dt = self.instance.last_session_date.strftime('%Y-%m-%dT%H:%M')
+            self.fields['last_session_date'].initial = dt

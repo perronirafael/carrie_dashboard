@@ -119,7 +119,7 @@ class MissedCheckinsChartView(View):
         start = request.GET.get("start")
         end = request.GET.get("end")
 
-        session_qs = PatientSession.objects.filter(status="missed")
+        session_qs = PatientSession.objects.filter(status="Missed Check")
         patient_qs = Patient.objects.all()
 
         if diagnosis and diagnosis != "all":
