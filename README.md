@@ -55,7 +55,7 @@ git clone https://github.com/perronirafael/carrie_dashboard.git
 cd carrie_dashboard
 
 # 2) Create & activate virtual environment
-python -m venv venv
+py -m venv venv
 
 # macOS/Linux
 source venv/bin/activate
