@@ -9,11 +9,7 @@ A Django-based dashboard for managing patients and tracking session adherence.
 1. [Overview](#overview)  
 2. [Technologies & Requirements](#technologies--requirements)  
 3. [Models & Database Tables](#models--database-tables)  
-4. [Cloning & Environment Setup](#cloning--environment-setup)  
-5. [Environment Variables (`.env`)](#environment-variables-env)  
-6. [Migrations & Seeding](#migrations--seeding)  
-7. [Running the Application](#running-the-application)  
-8. [Admin & Testing](#admin--testing)  
+4. [Cloning & Environment Setup](#cloning--environment-setup)    
 
 ---
 
