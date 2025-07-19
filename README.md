@@ -56,11 +56,6 @@ cd carrie_dashboard
 
 # 2) Create & activate virtual environment
 py -m venv venv
-
-# macOS/Linux
-source venv/bin/activate
-
-# Windows (PowerShell)
 .\venv\Scripts\Activate.ps1
 
 # 3) Install dependencies
